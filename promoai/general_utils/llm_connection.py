@@ -105,9 +105,14 @@ def generate_response_with_history(
         role = message["role"]
         text = message["content"]
         if use_responses_api:
+            payload_type = (
+                "output_text"
+                if role == "assistant" and llm_name.startswith("gpt")
+                else "input_text"
+            )
             processed_message = {
                 "role": role,
-                "content": [{"type": "input_text", "text": text}],
+                "content": [{"type": payload_type, "text": text}],
             }
         else:
             processed_message = {"role": role, "content": text}
@@ -182,3 +187,44 @@ def generate_response_with_history_anthropic(conversation, api_key, llm_name):
         return message.content[0].text
     except Exception:
         raise Exception("Connection failed! This is the response: " + str(message))
+
+
+def generate_response_llm(conversation, api_key, llm_name, ai_provider):
+    """
+    Generates a response from the LLM using the conversation history.
+    :param conversation: The conversation history to be included
+    :param api_key: API key
+    :param llm_name: model to be used
+    :param ai_provider: AI provider to be used
+    :return: The content of the LLM response
+    """
+    response = None
+    if ai_provider == AIProviders.GOOGLE.value:
+        response = generate_response_with_history_google(
+            conversation, api_key, llm_name
+        )
+    elif ai_provider == AIProviders.ANTHROPIC.value:
+        response = generate_response_with_history_anthropic(
+            conversation, api_key, llm_name
+        )
+    else:
+        use_responses_api = False
+        if ai_provider == AIProviders.DEEPINFRA.value:
+            api_url = "https://api.deepinfra.com/v1/openai"
+        elif ai_provider == AIProviders.OPENAI.value:
+            api_url = "https://api.openai.com/v1"
+            use_responses_api = True
+        elif ai_provider == AIProviders.DEEPSEEK.value:
+            api_url = "https://api.deepseek.com/"
+        elif ai_provider == AIProviders.MISTRAL_AI.value:
+            api_url = "https://api.mistral.ai/v1/"
+        else:
+            raise Exception(f"AI provider {ai_provider} is not supported!")
+        response = generate_response_with_history(
+            conversation,
+            api_key,
+            llm_name,
+            api_url,
+            use_responses_api=use_responses_api,
+        )
+    return response
