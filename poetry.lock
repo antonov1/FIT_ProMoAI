@@ -1979,13 +1979,13 @@ type = ["mypy (>=1.14.1)"]
 
 [[package]]
 name = "pm4py"
-version = "2.7.14.2"
+version = "2.7.15"
 description = "Process mining for Python"
 optional = false
 python-versions = "*"
 files = [
-    {file = "pm4py-2.7.14.2-py3-none-any.whl", hash = "sha256:7bb0ce81a5cd4f342ea7d23a7e321c928cc3ba6fab73c472f4fd8523553d15e9"},
-    {file = "pm4py-2.7.14.2.tar.gz", hash = "sha256:8486b221622ce4a15d50e4b2f474fe054d19e8ec82c1f74034dac181bd3dc417"},
+    {file = "pm4py-2.7.15-py3-none-any.whl", hash = "sha256:1fd281498704e6906e15fe35e6ddf2ee868382e6c8f7f78afec57614b7046dbc"},
+    {file = "pm4py-2.7.15.tar.gz", hash = "sha256:f5b52afb886bb99c553677ddd3c2f3f0bf44e1e86799790cece8531ae3d143e0"},
 ]
 
 [package.dependencies]
@@ -3157,4 +3157,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "!=3.9.7, >=3.9, <3.11"
-content-hash = "122d525ef66874ee8190ae7ce71103efe9e9f7e980656975835afc34d2c9fcc3"
+content-hash = "1861ec1e58dcdeaaed2d83d43e6235153433f83a7090f2830bbb51a9d2ec5819"
