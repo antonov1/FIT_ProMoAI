@@ -20,7 +20,6 @@ autoflake = "2.3.1"
 usort = "1.0.7"
 black = "22.3.0"
 typing-extensions = "^4.13.2"
-graphviz = "^0.20.3"
 
 
 [build-system]
